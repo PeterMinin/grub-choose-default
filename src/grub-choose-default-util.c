@@ -85,6 +85,7 @@ grub_choose_default_exec(const gchar * directory, const gchar * script, gboolean
   dirname = g_path_get_dirname (path);
   basename = g_path_get_basename (path);
   g_free (path);
+  path = NULL;
 
   dir = g_dir_open (dirname, 0, NULL);
 
@@ -108,6 +109,8 @@ grub_choose_default_exec(const gchar * directory, const gchar * script, gboolean
     }
   }
   g_dir_close (dir);
+  if (path == NULL)
+    return FALSE;
 #endif
 
   g_print ("Trying to execute with prefix %s\n", path);
